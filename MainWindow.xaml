@@ -1,0 +1,41 @@
+﻿<Window x:Class="Registration_form.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Formularz" Height="400" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <TextBlock Text="Imię:" Margin="5"/>
+            <TextBox x:Name="FirstNameTextBox" Width="150" Margin="5"/>
+            <TextBlock Text="Nazwisko:" Margin="5"/>
+            <TextBox x:Name="LastNameTextBox" Width="150" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <TextBlock Text="Rok urodzenia:" Margin="5"/>
+            <TextBox x:Name="BirthDatePickerTextBox" Width="150" Margin="5"/>
+
+            <TextBlock Text="Kraj:" Margin="5"/>
+            <TextBox x:Name="CountryComboBoxTextBox" Width="150" Margin="5"/>
+
+            <TextBlock Text="Numer telefonu:" Margin="5"/>
+            <TextBox x:Name="PhoneNumberTextBox" Width="150" Margin="5"/>
+        </StackPanel>
+
+        <ToggleButton x:Name="speechRecognitionToggle" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="30" Height="30" Margin="10" Checked="SpeechRecognitionToggle_Checked" Unchecked="SpeechRecognitionToggle_Unchecked">
+            <ToggleButton.Content>
+                <Image Source="Images/mic_icon.png" Width="20" Height="20"/>
+            </ToggleButton.Content>
+        </ToggleButton>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <Button Content="Zapisz" Width="100" Height="30" Margin="5" Click="SaveButton_Click" />
+            <Button Content="Wyczyść" Width="100" Height="30" Margin="5" Click="ClearButton_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

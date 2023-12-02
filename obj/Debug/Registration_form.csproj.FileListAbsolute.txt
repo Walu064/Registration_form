@@ -1,0 +1,17 @@
+D:\Projekty\Registration_form\obj\Debug\Registration_form.csproj.AssemblyReference.cache
+D:\Projekty\Registration_form\obj\Debug\Registration_form.csproj.SuggestedBindingRedirects.cache
+D:\Projekty\Registration_form\obj\Debug\MainWindow.baml
+D:\Projekty\Registration_form\obj\Debug\MainWindow.g.cs
+D:\Projekty\Registration_form\obj\Debug\App.g.cs
+D:\Projekty\Registration_form\obj\Debug\Registration_form_MarkupCompile.cache
+D:\Projekty\Registration_form\obj\Debug\Registration_form.g.resources
+D:\Projekty\Registration_form\obj\Debug\Registration_form.Properties.Resources.resources
+D:\Projekty\Registration_form\obj\Debug\Registration_form.csproj.GenerateResource.cache
+D:\Projekty\Registration_form\obj\Debug\Registration_form.csproj.CoreCompileInputs.cache
+D:\Projekty\Registration_form\bin\Debug\Registration_form.exe.config
+D:\Projekty\Registration_form\bin\Debug\Registration_form.exe
+D:\Projekty\Registration_form\bin\Debug\Registration_form.pdb
+D:\Projekty\Registration_form\obj\Debug\Registration_form.exe
+D:\Projekty\Registration_form\obj\Debug\Registration_form.pdb
+D:\Projekty\Registration_form\bin\Debug\Microsoft.Speech.dll
+D:\Projekty\Registration_form\obj\Debug\Registration_form.csproj.CopyComplete

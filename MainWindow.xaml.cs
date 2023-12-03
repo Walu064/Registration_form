@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using Microsoft.Speech.Recognition;
 using Microsoft.Speech.Synthesis;
 
@@ -81,25 +81,32 @@ namespace Registration_form
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (AreAllFieldsFilled())
+            ClearBackgroundProperty();
+            List<string> unfilledFields = GetUnfilledFields();
+
+            if (unfilledFields.Count == 0)
             {
                 ShowMessageBoxWithFormData();
             }
             else
             {
-                string message = "Wypełnij wszystkie pola przed zapisaniem.";
-                speechSynthesizer.SpeakAsync(message);
-                MessageBox.Show(message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+                string message;
+                if (unfilledFields.Count == 1)
+                {
+                    message = $"Uzupełnij pole: {unfilledFields[0]}";
+                }
+                else
+                {
+                    message = $"Uzupełnij pola: {string.Join(", ", unfilledFields)}";
+                }
 
-        private bool AreAllFieldsFilled()
-        {
-            return !string.IsNullOrWhiteSpace(FirstNameTextBox.Text)
-                && !string.IsNullOrWhiteSpace(LastNameTextBox.Text)
-                && (!string.IsNullOrWhiteSpace(BirthDatePickerTextBox.Text))
-                && (!string.IsNullOrWhiteSpace(CountryComboBoxTextBox.Text))
-                && !string.IsNullOrWhiteSpace(PhoneNumberTextBox.Text);
+                speechSynthesizer.SpeakAsync(message);
+
+                foreach (var field in unfilledFields)
+                {
+                    HighlightField(field);
+                }
+            }
         }
 
         private void ShowMessageBoxWithFormData()
@@ -108,14 +115,69 @@ namespace Registration_form
                            + $"Nazwisko: {LastNameTextBox.Text}\n"
                            + $"Rok urodzenia: {BirthDatePickerTextBox.Text}\n"
                            + $"Kraj: {CountryComboBoxTextBox.Text}\n"
-                           + $"Numer telefonu: {PhoneNumberTextBox.Text}"
+                           + $"Numer telefonu: {PhoneNumberTextBox.Text}\n"
                            + "Jeśli chcesz poprawić formularz wciśnij okej, kliknij przycisk WYCZYŚĆ i wypełnij ponownie.";
+            ClearBackgroundProperty();
             speechSynthesizer.SpeakAsync(message);
             MessageBox.Show(message, "Zapisano", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
+        private List<string> GetUnfilledFields()
+        {
+            List<string> unfilledFields = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(FirstNameTextBox.Text))
+                unfilledFields.Add("Imię");
+
+            if (string.IsNullOrWhiteSpace(LastNameTextBox.Text))
+                unfilledFields.Add("Nazwisko");
+
+            if (string.IsNullOrWhiteSpace(BirthDatePickerTextBox.Text))
+                unfilledFields.Add("Rok urodzenia");
+
+            if (string.IsNullOrWhiteSpace(CountryComboBoxTextBox.Text))
+                unfilledFields.Add("Kraj");
+
+            if (string.IsNullOrWhiteSpace(PhoneNumberTextBox.Text))
+                unfilledFields.Add("Numer telefonu");
+
+            return unfilledFields;
+        }
+
+        private void HighlightField(string fieldName)
+        {
+            switch (fieldName)
+            {
+                case "Imię":
+                    FirstNameTextBox.Background = Brushes.Red;
+                    break;
+                case "Nazwisko":
+                    LastNameTextBox.Background = Brushes.Red;
+                    break;
+                case "Rok urodzenia":
+                    BirthDatePickerTextBox.Background = Brushes.Red;
+                    break;
+                case "Kraj":
+                    CountryComboBoxTextBox.Background = Brushes.Red;
+                    break;
+                case "Numer telefonu":
+                    PhoneNumberTextBox.Background = Brushes.Red;
+                    break;
+            }
+        }
+
+        private void ClearBackgroundProperty()
+        {
+            FirstNameTextBox.ClearValue(BackgroundProperty);
+            LastNameTextBox.ClearValue(BackgroundProperty);
+            BirthDatePickerTextBox.ClearValue(BackgroundProperty);
+            CountryComboBoxTextBox.ClearValue(BackgroundProperty);
+            PhoneNumberTextBox.ClearValue(BackgroundProperty);
+        }
+
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
+            ClearBackgroundProperty();
             FirstNameTextBox.Clear();
             LastNameTextBox.Clear();
             BirthDatePickerTextBox.Clear();
